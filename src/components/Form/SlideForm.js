@@ -7,68 +7,68 @@ const schema = {
   title: "Create Google Slides",
   description: "A simple form to create google slides",
   type: "object",
-  required: ["fileName", "mainTitle"],
+  // required: ["fileName", "mainTitle"],
   properties: {
-    fileName: {
-      type: "string",
-      title: "File Name",
-    },
-    mainTitle: {
-      type: "string",
-      title: "Presentation Title",
-    },
-    mainDescription: {
-      type: "string",
-      title: "Presentation Description",
-    },
-    slide1Title: {
-      type: "string",
-      title: "Slide 1 Title",
-    },
-    slide1Description: {
-      type: "string",
-      title: "Slide 1 Description",
-    },
-    slide1Picture: {
-      type: "string",
-      title: "Slide 1 Picture",
-    },
-    slide1Notes: {
-      type: "string",
-      title: "Slide 1 Notes",
-    },
-    slide2Title: {
-      type: "string",
-      title: "Slide 2 Title",
-    },
-    slide2Description: {
-      type: "string",
-      title: "Slide 2 Description",
-    },
-    slide2Picture: {
-      type: "string",
-      title: "Slide 2 Picture",
-    },
-    slide2Notes: {
-      type: "string",
-      title: "Slide 2 Notes",
-    },
-    slide3Title: {
-      type: "string",
-      title: "Slide 3 Title",
-    },
-    slide3Description: {
-      type: "string",
-      title: "Slide 3 Description",
-    },
-    slide3Picture: {
-      type: "string",
-      title: "Slide 3 Picture",
-    },
-    slide3Notes: {
-      type: "string",
-      title: "Slide 3 Notes",
-    },
+    // fileName: {
+    //   type: "string",
+    //   title: "File Name",
+    // },
+    // mainTitle: {
+    //   type: "string",
+    //   title: "Presentation Title",
+    // },
+    // mainDescription: {
+    //   type: "string",
+    //   title: "Presentation Description",
+    // },
+    // slide1Title: {
+    //   type: "string",
+    //   title: "Slide 1 Title",
+    // },
+    // slide1Description: {
+    //   type: "string",
+    //   title: "Slide 1 Description",
+    // },
+    // slide1Picture: {
+    //   type: "string",
+    //   title: "Slide 1 Picture",
+    // },
+    // slide1Notes: {
+    //   type: "string",
+    //   title: "Slide 1 Notes",
+    // },
+    // slide2Title: {
+    //   type: "string",
+    //   title: "Slide 2 Title",
+    // },
+    // slide2Description: {
+    //   type: "string",
+    //   title: "Slide 2 Description",
+    // },
+    // slide2Picture: {
+    //   type: "string",
+    //   title: "Slide 2 Picture",
+    // },
+    // slide2Notes: {
+    //   type: "string",
+    //   title: "Slide 2 Notes",
+    // },
+    // slide3Title: {
+    //   type: "string",
+    //   title: "Slide 3 Title",
+    // },
+    // slide3Description: {
+    //   type: "string",
+    //   title: "Slide 3 Description",
+    // },
+    // slide3Picture: {
+    //   type: "string",
+    //   title: "Slide 3 Picture",
+    // },
+    // slide3Notes: {
+    //   type: "string",
+    //   title: "Slide 3 Notes",
+    // },
     // slide4Title: {
     //   type: "string",
     //   title: "Slide 4 Title",
@@ -122,8 +122,8 @@ const schema = {
 
 const onSubmit = ({ formData }, e) => {
   console.log("Data submitted: ", formData);
-  handleAuthClick(formData);
-  // handleCreateSlide(formData);
+  // handleAuthClick(formData);
+  handleCreateSlide(formData);
 };
 
 export default class SlideForm extends React.Component {
