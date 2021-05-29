@@ -1,6 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
-// import { gapi } from "https://apis.google.com/js/client.js";
 import { gapi } from "gapi-script";
+
+import descriptionTemplate from "./descriptionTemplate";
+
+import competitorTemplate1 from "./competitorTemplate1";
+import personaTemplate from "./personaTemplate";
+import teamTemplate from "./teamTemplate";
+
+import fakeData from "../data-models/slides-example.json";
 
 // Client ID and API key from the Developer Console
 var CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
@@ -54,7 +61,14 @@ var rgbColor = [55, 71, 79];
 var totalSlides = 6;
 var slideID = [];
 var slideTitleId = [];
-var slideTitleText = [];
+var slideTitleText = [
+  "Problem",
+  "Solution",
+  "Competitor Analysis",
+  "Persona",
+  "Conclusion",
+  "Team",
+];
 var slideDescriptionId = [];
 var slideDescriptionText = [];
 var slidePhotoId = [];
@@ -71,7 +85,7 @@ function setIDs() {
     slideTitleId[i] = uuidv4();
     slideDescriptionId[i] = uuidv4();
     slidePhotoId[i] = uuidv4();
-    slideTitleText[i] = "";
+    // slideTitleText[i] = "";
     slideDescriptionText[i] = "";
     slidePhotoUrl[i] =
       "https://storage.needpix.com/rsynced_images/chart-line-148256_1280.png";
@@ -80,26 +94,12 @@ function setIDs() {
 }
 
 function convertText(data) {
-  if (data.slide1Title) slideTitleText[0] = data.slide1Title;
-  if (data.slide2Title) slideTitleText[1] = data.slide2Title;
-  if (data.slide3Title) slideTitleText[2] = data.slide3Title;
-  if (data.slide4Title) slideTitleText[3] = data.slide4Title;
-  if (data.slide5Title) slideTitleText[4] = data.slide5Title;
-  if (data.slide6Title) slideTitleText[5] = data.slide6Title;
-
-  if (data.slide1Description) slideDescriptionText[0] = data.slide1Description;
-  if (data.slide2Description) slideDescriptionText[1] = data.slide2Description;
-  if (data.slide3Description) slideDescriptionText[2] = data.slide3Description;
-  if (data.slide4Description) slideDescriptionText[3] = data.slide4Description;
-  if (data.slide5Description) slideDescriptionText[4] = data.slide5Description;
-  if (data.slide6Description) slideDescriptionText[5] = data.slide6Description;
-
-  if (data.slide1Picture) slidePhotoUrl[0] = data.slide1Picture;
-  if (data.slide2Picture) slidePhotoUrl[1] = data.slide2Picture;
-  if (data.slide3Picture) slidePhotoUrl[2] = data.slide3Picture;
-  if (data.slide4Picture) slidePhotoUrl[3] = data.slide4Picture;
-  if (data.slide5Picture) slidePhotoUrl[4] = data.slide5Picture;
-  if (data.slide6Picture) slidePhotoUrl[5] = data.slide6Picture;
+  // if (data.slide1Picture) slidePhotoUrl[0] = data.slide1Picture;
+  // if (data.slide2Picture) slidePhotoUrl[1] = data.slide2Picture;
+  // if (data.slide3Picture) slidePhotoUrl[2] = data.slide3Picture;
+  // if (data.slide4Picture) slidePhotoUrl[3] = data.slide4Picture;
+  // if (data.slide5Picture) slidePhotoUrl[4] = data.slide5Picture;
+  // if (data.slide6Picture) slidePhotoUrl[5] = data.slide6Picture;
 
   if (data.slide1Notes) slideNoteText[1] = data.slide1Notes;
   if (data.slide2Notes) slideNoteText[2] = data.slide2Notes;
@@ -110,12 +110,14 @@ function convertText(data) {
 }
 
 export function handleCreateSlide(data) {
+  console.log(fakeData);
+  data = fakeData;
   setIDs();
   console.log("creating slide");
   console.log(data);
   gapi.client.slides.presentations
     .create({
-      title: data.fileName,
+      title: data.intro.title,
     })
     .then((response) => {
       // console.log(response);
@@ -135,13 +137,13 @@ function createSlide(data) {
     {
       insertText: {
         objectId: titleID,
-        text: data.mainTitle,
+        text: data.intro.title,
       },
     },
     {
       insertText: {
         objectId: subtitleID,
-        text: data.mainDescription,
+        text: data.intro.mission,
       },
     },
     {
@@ -154,48 +156,75 @@ function createSlide(data) {
       updateTextStyle: formatMainDescriptionText(subtitleID),
     },
   ];
+
   for (let i = 0; i < totalSlides; i++) {
     requests.push({ createSlide: slideCreation(slideID[i]) });
     requests.push({
       updatePageProperties: changeBackgroundColor(slideID[i]),
     });
-    requests.push({
-      createShape: createLeftTitle(slideID[i], slideTitleId[i]),
-    });
-    requests.push({
-      createShape: createLeftDescription(slideID[i], slideDescriptionId[i]),
-    });
-    requests.push({
-      createImage: createRightPhoto(
-        slideID[i],
-        slidePhotoId[i],
-        slidePhotoUrl[i]
-      ),
-    });
-    if (slideTitleText[i] !== "") {
-      requests.push({
-        insertText: {
-          objectId: slideTitleId[i],
-          text: slideTitleText[i],
-        },
-      });
-      requests.push({
-        updateTextStyle: formatTitleText(slideTitleId[i]),
-      });
-    }
-    if (slideDescriptionText[i] !== "") {
-      requests.push({
-        insertText: {
-          objectId: slideDescriptionId[i],
-          text: slideDescriptionText[i],
-        },
-      });
-      requests.push({
-        updateTextStyle: formatDescriptionText(slideDescriptionId[i]),
-      });
-    }
   }
-  // console.log(requests);
+  // /////////
+  // Slide 2 Problem
+  // /////////
+  var problem = descriptionTemplate(
+    slideID[0],
+    slideTitleText[0],
+    data.problem.problem
+  );
+  for (let i = 0; i < problem.length; i++) {
+    requests.push(problem[i]);
+  }
+  // /////////
+  // Slide 3 Solution
+  // /////////
+  var solution = descriptionTemplate(
+    slideID[1],
+    slideTitleText[1],
+    data.solution.solution
+  );
+  for (let i = 0; i < solution.length; i++) {
+    requests.push(solution[i]);
+  }
+  // /////////
+  // Slide 4 Competitor
+  // /////////
+  var competitor = competitorTemplate1(
+    slideID[2],
+    slideTitleText[2],
+    data.competitors
+  );
+  for (let i = 0; i < competitor.length; i++) {
+    requests.push(competitor[i]);
+  }
+  // /////////
+  // Slide 5 Persona
+  // /////////
+  var persona = personaTemplate(slideID[3], slideTitleText[3], data.persona);
+  for (let i = 0; i < persona.length; i++) {
+    requests.push(persona[i]);
+  }
+  // /////////
+  // Slide 6 Conclusion
+  // /////////
+  var conclusion = descriptionTemplate(
+    slideID[4],
+    slideTitleText[4],
+    data.conclusion.conclusion
+  );
+  for (let i = 0; i < conclusion.length; i++) {
+    requests.push(conclusion[i]);
+  }
+  // /////////
+  // Slide 7 Team
+  // /////////
+  var team = teamTemplate(slideID[5], slideTitleText[5], data.team);
+  for (let i = 0; i < team.length; i++) {
+    requests.push(team[i]);
+  }
+  // /////////
+  // END
+  // /////////
+  console.log(requests);
 
   gapi.client.slides.presentations
     .batchUpdate({
@@ -203,40 +232,42 @@ function createSlide(data) {
       requests: requests,
     })
     .then((createSlideResponse) => {
-      // console.log(createSlideResponse.result);
-      setNotes();
+      console.log(createSlideResponse.result);
+      console.log("presentation created");
+
+      // setNotes();
     });
 }
 
-function setNotes() {
-  var requests = [];
-  gapi.client.slides.presentations
-    .get({
-      presentationId: deckID,
-    })
-    .then(function (response) {
-      response.result.slides.forEach(function (slide, i) {
-        var slideNoteId =
-          slide.slideProperties.notesPage.notesProperties.speakerNotesObjectId;
-        requests.push({
-          insertText: { objectId: slideNoteId, text: slideNoteText[i] },
-        });
-      });
-    })
-    .then(() => {
-      gapi.client.slides.presentations
-        .batchUpdate({
-          presentationId: deckID,
-          requests: requests,
-        })
-        .then(() => {
-          console.log("presentation created");
-          handleSignoutClick();
+// function setNotes() {
+//   var requests = [];
+//   gapi.client.slides.presentations
+//     .get({
+//       presentationId: deckID,
+//     })
+//     .then(function (response) {
+//       response.result.slides.forEach(function (slide, i) {
+//         var slideNoteId =
+//           slide.slideProperties.notesPage.notesProperties.speakerNotesObjectId;
+//         requests.push({
+//           insertText: { objectId: slideNoteId, text: slideNoteText[i] },
+//         });
+//       });
+//     })
+//     .then(() => {
+//       gapi.client.slides.presentations
+//         .batchUpdate({
+//           presentationId: deckID,
+//           requests: requests,
+//         })
+//         .then(() => {
+//           console.log("presentation created with notes");
+//           // handleSignoutClick();
 
-          // console.log(createSlideResponse.result);
-        });
-    });
-}
+//           // console.log(createSlideResponse.result);
+//         });
+//     });
+// }
 
 function slideCreation(id) {
   var slide = {
@@ -272,89 +303,33 @@ function changeBackgroundColor(slideID) {
   return background;
 }
 
-function createLeftTitle(slideID, textID) {
-  var create = {
-    objectId: textID,
-    shapeType: "TEXT_BOX",
-    elementProperties: {
-      pageObjectId: slideID,
-      size: {
-        width: {
-          magnitude: 3000000,
-          unit: "EMU",
-        },
-        height: {
-          magnitude: 3000000,
-          unit: "EMU",
-        },
-      },
-      transform: {
-        scaleX: 2.8402,
-        scaleY: 0.1909,
-        translateX: 311700,
-        translateY: 445025,
-        unit: "EMU",
-      },
-    },
-  };
-  return create;
-}
-
-function createLeftDescription(slideID, textID) {
-  var create = {
-    objectId: textID,
-    shapeType: "TEXT_BOX",
-    elementProperties: {
-      pageObjectId: slideID,
-      size: {
-        width: {
-          magnitude: 3000000,
-          unit: "EMU",
-        },
-        height: {
-          magnitude: 3000000,
-          unit: "EMU",
-        },
-      },
-      transform: {
-        scaleX: 1.8018,
-        scaleY: 1.1388,
-        translateX: 311700,
-        translateY: 1152475,
-        unit: "EMU",
-      },
-    },
-  };
-  return create;
-}
-
-function createRightPhoto(slideID, imageID, imageUrl) {
-  var create = {
-    objectId: imageID,
-    url: imageUrl,
-    elementProperties: {
-      pageObjectId: slideID,
-      size: {
-        width: {
-          magnitude: 32000,
-          unit: "EMU",
-        },
-        height: {
-          magnitude: 23350,
-          unit: "EMU",
-        },
-      },
-      transform: {
-        scaleX: 97.6266,
-        scaleY: 128.7131,
-        translateX: 5848750.03,
-        translateY: 1152474.95,
-        unit: "EMU",
-      },
-    },
-  };
-  return create;
-}
+// function createRightPhoto(slideID, imageID, imageUrl) {
+//   var create = {
+//     objectId: imageID,
+//     url: imageUrl,
+//     elementProperties: {
+//       pageObjectId: slideID,
+//       size: {
+//         width: {
+//           magnitude: 32000,
+//           unit: "EMU",
+//         },
+//         height: {
+//           magnitude: 23350,
+//           unit: "EMU",
+//         },
+//       },
+//       transform: {
+//         scaleX: 97.6266,
+//         scaleY: 128.7131,
+//         translateX: 5848750.03,
+//         translateY: 1152474.95,
+//         unit: "EMU",
+//       },
+//     },
+//   };
+//   return create;
+// }
 
 function formatMainTitleText(textID) {
   let style = {
@@ -392,53 +367,6 @@ function formatMainDescriptionText(textID) {
       fontFamily: "Average",
       fontSize: {
         magnitude: 26,
-        unit: "PT",
-      },
-    },
-    textRange: {
-      type: "ALL",
-    },
-  };
-  return style;
-}
-
-function formatTitleText(textID) {
-  let style = {
-    objectId: textID,
-    fields: "foregroundColor,fontFamily,fontSize",
-    style: {
-      foregroundColor: {
-        opaqueColor: {
-          themeColor: "LIGHT2",
-        },
-      },
-      // bold: true,
-      fontFamily: "Oswald",
-      fontSize: {
-        magnitude: 30,
-        unit: "PT",
-      },
-    },
-    textRange: {
-      type: "ALL",
-    },
-  };
-  return style;
-}
-
-function formatDescriptionText(textID) {
-  let style = {
-    objectId: textID,
-    fields: "foregroundColor,fontFamily,fontSize",
-    style: {
-      foregroundColor: {
-        opaqueColor: {
-          themeColor: "LIGHT1",
-        },
-      },
-      fontFamily: "Average",
-      fontSize: {
-        magnitude: 16,
         unit: "PT",
       },
     },
