@@ -1,0 +1,36 @@
+{
+  "conclusion": {
+    "conclusion": "string"
+  },
+  "competitors": [
+    {
+      "name": "string",
+      "description": "string"
+    }
+  ],
+  "intro": {
+    "introImages": ["strings Image url"],
+    "mission": "string",
+    "title": "string"
+  },
+  "persona": {
+    "age": "string",
+    "name": "string",
+    "needs": "string",
+    "pains": "string",
+    "scenario": ["strings"]
+  },
+  "problem": {
+    "problem": "string"
+  },
+  "solution": {
+    "solution": "string"
+  },
+  "team": [
+    {
+      "LinkedInImg": "string LinkedInImg",
+      "description": "string",
+      "name": "string"
+    }
+  ]
+}
