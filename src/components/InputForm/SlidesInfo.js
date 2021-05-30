@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
-import from '@material-ui/core/'
+import TextField from "@material-ui/core/TextField";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = (theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+});
+
 class SlidesInfo extends Component {
 
     render() {
+        const { classes } = this.props;
         return (
             <div>
                 <div>

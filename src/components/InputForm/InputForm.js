@@ -29,6 +29,15 @@ class InputForm extends Component {
         }
     }
 
+
+    handleCompany(e){
+        this.setState({company: e.target.value});
+    }
+
+    handleProduct(e){
+        this.setState({product: e.target.value});
+    }
+
     handleMission(e){
         this.setState({mission: e.target.value});
     }
@@ -56,7 +65,9 @@ class InputForm extends Component {
     }
 
     handleSubmit(){
-        let data = {industry: this.state.industry,
+        let data = {company: this.state.company,
+                product: this.state.product,
+                industry: this.state.industry,
                 mission: this.state.mission,
                 problem: this.state.problem,
                 solution: this.state.solution,
@@ -80,6 +91,20 @@ class InputForm extends Component {
         return (
           <form className={classes.root} noValidate autoComplete="off">
             <div>
+                <TextField
+                required
+                id="standard-required"
+                label="Company"
+                defaultValue=""
+                onChange = {this.handleCompany.bind(this)}
+                />
+                <TextField
+                required
+                id="standard-required"
+                label="Product"
+                defaultValue=""
+                onChange = {this.handleProduct.bind(this)}
+                />
                 <TextField
                 required
                 id="standard-required"
