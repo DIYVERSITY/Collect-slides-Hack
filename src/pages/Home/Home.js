@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import InputForm from "../../components/InputForm/InputForm.js";
 import TextAreaSlide from "../../components/TextAreaSlide/TextAreaSlide";
+import styles from "./Home.module.css";
+import { handleAuthClick } from "../../utils/google-slides";
 
 const endPoints = {
   all: "https://537946d0b176.ngrok.io/",
@@ -33,17 +35,28 @@ class Home extends Component {
   }
 
   render() {
+    function printToSlides() {
+      console.log("button pressed");
+      // pass data into the function below to send to slides
+      handleAuthClick();
+    }
     return (
-      <div>
+      <div className={styles.homeContainer}>
         <div>Home page</div>
         <InputForm submit={this.submitData} />
+
         <TextAreaSlide title="Intro (slide 1)" description={dummyText} />
-
         <TextAreaSlide title="Problem (slide 2)" description={dummyText} />
-
         <TextAreaSlide title="Solution (slide 3)" description={dummyText} />
         <TextAreaSlide title="Persona (slide 4)" description={dummyText} />
         <TextAreaSlide title="Competitor (slide 5)" description={dummyText} />
+
+        <div className={styles.buttonContainer}>
+          <button>Save</button>
+        </div>
+        <div onClick={printToSlides} className={styles.buttonContainer}>
+          <button>Print to Slides</button>
+        </div>
       </div>
     );
   }

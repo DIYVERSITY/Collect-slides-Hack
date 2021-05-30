@@ -94,7 +94,11 @@ function convertText(data) {
 
 export function handleCreateSlide(data) {
   // console.log(fakeData);
+
+  // comment out fakeData for real data into the function
   data = fakeData;
+  // comment out fakeData for real data into the function
+
   setIDs();
   console.log("creating slide");
   // console.log(data);
