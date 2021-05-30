@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
-import IconButton from '@material-ui/core/IconButton';
-import AddIcon from '@material-ui/icons/Add';
+import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -9,118 +9,127 @@ const styles = (theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(2),
-      width: "70ch"
+      width: "70ch",
     },
 
-    "& .MuiButton-root":{
-      margin: theme.spacing(2)
+    "& .MuiButton-root": {
+      margin: theme.spacing(2),
     },
-    margin: theme.spacing(1)
-  }
+    margin: theme.spacing(1),
+  },
 });
 
 class InputForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      teamCount: 2,
+      linkedinUrls: ["", ""],
+    };
+  }
 
-    constructor(props){
-        super(props);
-        this.state = {
-            teamCount: 2,
-            linkedinUrls:["", ""]
-        }
-    }
+  handleMission(e) {
+    this.setState({ mission: e.target.value });
+  }
 
-    handleMission(e){
-        this.setState({mission: e.target.value});
-    }
+  handleIndustry(e) {
+    this.setState({ industry: e.target.value });
+  }
 
-    handleIndustry(e){
-        this.setState({industry: e.target.value});
-    }
+  handleProblem(e) {
+    this.setState({ problem: e.target.value });
+  }
 
-    handleProblem(e){
-        this.setState({problem: e.target.value});
-    }
+  handleSolution(e) {
+    this.setState({ solution: e.target.value });
+  }
 
-    handleSolution(e){
-        this.setState({solution: e.target.value});
-    }
+  handleUrls(e) {
+    let urls = [...this.state.linkedinUrls];
+    urls[e.target.name] = e.target.value;
+    this.setState({ linkedinUrls: urls });
+  }
 
-    handleUrls(e){
-        let urls = [...this.state.linkedinUrls]
-        urls[e.target.name] = e.target.value
-        this.setState({linkedinUrls: urls});
-    }
+  addTeamMember() {
+    this.setState({ linkedinUrls: [...this.state.linkedinUrls, ""] });
+  }
 
-    addTeamMember(){
-        this.setState({linkedinUrls:[...this.state.linkedinUrls, ""]})
-    }
+  handleSubmit() {
+    let data = {
+      industry: this.state.industry,
+      mission: this.state.mission,
+      problem: this.state.problem,
+      solution: this.state.solution,
+      linkedinUrls: this.state.linkedinUrls,
+    };
+    this.props.submit(data);
+  }
 
-    handleSubmit(){
-        let data = {industry: this.state.industry,
-                mission: this.state.mission,
-                problem: this.state.problem,
-                solution: this.state.solution,
-                linkedinUrls: this.state.linkedinUrls}
-        this.props.submit(data)
-    }
-
-    render() {
-        const { classes } = this.props;
-        let teamMemebers = this.state.linkedinUrls.map((item, index)=>(
-                            <TextField
-                            required
-                            key={index}
-                            id="standard-required"
-                            label={"Team Member "+index}
-                            defaultValue={item}
-                            name = {index}
-                            onChange = {this.handleUrls.bind(this)}
-                            />
-                            ));
-        return (
-          <form className={classes.root} noValidate autoComplete="off">
-            <div>
-                <TextField
-                required
-                id="standard-required"
-                label="Industry"
-                defaultValue=""
-                onChange = {this.handleIndustry.bind(this)}
-                />
-                <TextField
-                required
-                id="standard-required"
-                label="Mission"
-                defaultValue=""
-                onChange = {this.handleMission.bind(this)}
-                />
-                <TextField
-                required
-                id="standard-required"
-                label="Problem"
-                defaultValue=""
-                onChange = {this.handleProblem.bind(this)}
-                />
-                <TextField
-                required
-                id="standard-required"
-                label="Solution"
-                defaultValue=""
-                onChange = {this.handleSolution.bind(this)}
-                />
-            </div>
-            <div>
-                {teamMemebers}
-                <IconButton aria-label="add Member" onClick={this.addTeamMember.bind(this)}>
-                    <AddIcon/>
-                </IconButton>
-            </div>
-            <Button variant="contained" color="primary" href="#contained-buttons" onClick={this.handleSubmit.bind(this)}>
-              Submit
-            </Button>
-          </form>
-        );
-    }
+  render() {
+    const { classes } = this.props;
+    let teamMemebers = this.state.linkedinUrls.map((item, index) => (
+      <TextField
+        required
+        key={index}
+        id="standard-required"
+        label={"Team Member " + index}
+        defaultValue={item}
+        name={index}
+        onChange={this.handleUrls.bind(this)}
+      />
+    ));
+    return (
+      <form className={classes.root} noValidate autoComplete="off">
+        <div>
+          <TextField
+            required
+            id="standard-required"
+            label="Industry"
+            defaultValue=""
+            onChange={this.handleIndustry.bind(this)}
+          />
+          <TextField
+            required
+            id="standard-required"
+            label="Mission"
+            defaultValue=""
+            onChange={this.handleMission.bind(this)}
+          />
+          <TextField
+            required
+            id="standard-required"
+            label="Problem"
+            defaultValue=""
+            onChange={this.handleProblem.bind(this)}
+          />
+          <TextField
+            required
+            id="standard-required"
+            label="Solution"
+            defaultValue=""
+            onChange={this.handleSolution.bind(this)}
+          />
+        </div>
+        <div>
+          {teamMemebers}
+          <IconButton
+            aria-label="add Member"
+            onClick={this.addTeamMember.bind(this)}
+          >
+            <AddIcon />
+          </IconButton>
+        </div>
+        <Button
+          variant="contained"
+          color="primary"
+          href="#contained-buttons"
+          onClick={this.handleSubmit.bind(this)}
+        >
+          Submit
+        </Button>
+      </form>
+    );
+  }
 }
 
 export default withStyles(styles, { withTheme: true })(InputForm);
