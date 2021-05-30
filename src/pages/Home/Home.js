@@ -6,7 +6,7 @@ import ImageArea from "../../components/Images/ImageArea.js";
 import styles from "./Home.module.css";
 import { handleAuthClick } from "../../utils/google-slides";
 
-const url = "http://888ab0fd29b2.ngrok.io/";
+const url = "http://bd48b27f1da6.ngrok.io/";
 const endPoints = {
   intro: "intro",
   problem: "problem",
@@ -21,37 +21,37 @@ class Home extends Component {
     super(props);
     this.state = {
       conclusion: {
-        conclusion: "string",
+        conclusion: "",
       },
       competitors: [
         {
-          name: "string",
-          description: "string",
+          name: "",
+          description: "",
         },
       ],
       intro: {
         introImages: ["strings Image url"],
-        mission: "string",
+        mission: "",
         title: "",
       },
       persona: {
-        age: "string",
-        name: "string",
-        needs: "string",
-        pains: "string",
-        scenario: ["strings"],
+        age: "",
+        name: "",
+        needs: "",
+        pains: "",
+        scenario: [""],
       },
       problem: {
-        problem: "string",
+        problem: "",
       },
       solution: {
-        solution: "string",
+        solution: "",
       },
       team: [
         {
-          LinkedInImg: "string LinkedInImg",
-          description: "string",
-          name: "string",
+          LinkedInImg: "",
+          description: "",
+          name: "",
         },
       ],
       imageUrl: "",
@@ -146,13 +146,13 @@ class Home extends Component {
           section="persona"
           data={this.state.persona}
         />
-        <TextAreaSlide
+        {/* <TextAreaSlide
           title="Competitor (slide 5)"
           section="competitors"
           data={this.state.competitors}
-        />
+        /> */}
         <TextAreaSlide
-          title="Conclusion (slide 6)"
+          title="Conclusion (slide 5)"
           section="conclusion"
           data={this.state.conclusion}
         />
