@@ -1,23 +1,24 @@
 import React, { Component } from "react";
-import TextField from "@material-ui/core/TextField";
+// import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
-import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
+// import Button from "@material-ui/core/Button";
+// import { withStyles } from "@material-ui/core/styles";
+import styles from "./InputForm.module.css";
 
-const styles = (theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(2),
-      width: "70ch",
-    },
+// const styles = (theme) => ({
+//   root: {
+//     "& .MuiTextField-root": {
+//       margin: theme.spacing(2),
+//       width: "70ch",
+//     },
 
-    "& .MuiButton-root": {
-      margin: theme.spacing(2),
-    },
-    margin: theme.spacing(1),
-  },
-});
+//     "& .MuiButton-root": {
+//       margin: theme.spacing(2),
+//     },
+//     margin: theme.spacing(1),
+//   },
+// });
 
 class InputForm extends Component {
   constructor(props) {
@@ -26,9 +27,12 @@ class InputForm extends Component {
       company: "DIYversity",
       product: "Collect It Presenter",
       industry: "Startups",
-      mission: "We help other startups focus more on important work while our AI takes care of their Slide Decks.",
-      problem: "It's hard to come up with ideas and takes too long to make slides.",
-      solution: "Make Pitch Decks and Case Study Slides fast, easier, and smarter.",
+      mission:
+        "We help other startups focus more on important work while our AI takes care of their Slide Decks.",
+      problem:
+        "It's hard to come up with ideas and takes too long to make slides.",
+      solution:
+        "Make Pitch Decks and Case Study Slides fast, easier, and smarter.",
       teamCount: 2,
       linkedinUrls: ["Rene", "Danielle", "Eric", "Mr T"],
     };
@@ -68,7 +72,7 @@ class InputForm extends Component {
     this.setState({ linkedinUrls: [...this.state.linkedinUrls, ""] });
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     let data = {
       company: this.state.company,
       product: this.state.product,
@@ -79,66 +83,133 @@ class InputForm extends Component {
       linkedinUrls: this.state.linkedinUrls,
     };
     this.props.submit(data);
-  }
+  };
 
   render() {
-    const { classes } = this.props;
+    // const { classes } = this.props;
     let teamMemebers = this.state.linkedinUrls.map((item, index) => (
-      <TextField
-        required
-        key={index}
-        id="standard-required"
-        label={"Team Member " + index}
-        defaultValue={item}
-        // name={index}
-        onChange={this.handleUrls.bind(this)}
-      />
+      <div className={styles.formRow} key={index}>
+        {/* <TextField
+          required
+          key={index}
+          id="standard-required"
+          label={"Team Member " + index}
+          defaultValue={item}
+          // name={index}
+          onChange={this.handleUrls.bind(this)}
+        /> */}
+        Team Member {index}
+        <textarea
+          className={styles.textField}
+          onChange={this.handleUrls.bind(this)}
+        ></textarea>
+      </div>
     ));
     return (
-      <form className={classes.root} noValidate autoComplete="off">
-        <div>
-          <TextField
-            required
-            id="company-id"
-            label="Company"
-            defaultValue={this.state.company}
-            onChange={this.handleCompany.bind(this)}
-          />
-          <TextField
-            required
-            id="product-id"
-            label="Product"
-            defaultValue={this.state.product}
-            onChange={this.handleProduct.bind(this)}
-          />
-          <TextField
-            required
-            id="industry-id"
-            label="Industry"
-            defaultValue={this.state.industry}
-            onChange={this.handleIndustry.bind(this)}
-          />
-          <TextField
-            required
-            id="mission-id"
-            label="Mission"
-            defaultValue={this.state.mission}
-            onChange={this.handleMission.bind(this)}
-          />
-          <TextField
-            required
-            id="problem-id"
-            label="Problem"
-            defaultValue={this.state.problem}
-            onChange={this.handleProblem.bind(this)}
-          />
-          <TextField
-            required
-            id="solution-id"
-            label="Solution"
-            defaultValue={this.state.solution}
-            onChange={this.handleSolution.bind(this)}
-          />
+      // <form className={classes.root} noValidate autoComplete="off">
+      // <form noValidate autoComplete="off">
+      <div>
+        <div className={styles.formContainer}>
+          <div className={styles.formRow}>
+            <div>
+              <div>Company</div>
+              <textarea
+                className={styles.textField}
+                onChange={this.handleCompany.bind(this)}
+                value={this.state.company}
+              ></textarea>
+            </div>
+            <div>
+              <div>Product</div>
+              <textarea
+                className={styles.textField}
+                onChange={this.handleProduct.bind(this)}
+                value={this.state.product}
+              ></textarea>
+            </div>
+
+            {/* <TextField
+              className={styles.textField}
+              required
+              id="company-id"
+              label="Company"
+              defaultValue=""
+              onChange={this.handleCompany.bind(this)}
+            />
+            <TextField
+              required
+              id="product-id"
+              label="Product"
+              defaultValue=""
+              onChange={this.handleProduct.bind(this)}
+            /> */}
+          </div>
+          <div className={styles.formRow}>
+            <div>
+              <div>Industry</div>
+              <textarea
+                className={styles.textField}
+                onChange={this.handleIndustry.bind(this)}
+                value={this.state.industry}
+              ></textarea>
+            </div>
+            <div>
+              <div>Mission</div>
+              <textarea
+                className={styles.textField}
+                onChange={this.handleMission.bind(this)}
+                value={this.state.mission}
+              ></textarea>
+            </div>
+
+            {/* <TextField
+              required
+              id="industry-id"
+              label="Industry"
+              defaultValue=""
+              onChange={this.handleIndustry.bind(this)}
+            />
+            <TextField
+              required
+              id="mission-id"
+              label="Mission"
+              defaultValue=""
+              onChange={this.handleMission.bind(this)}
+            /> */}
+          </div>
+
+          <div className={styles.formRow}>
+            <div>
+              <div>Problem</div>
+              <textarea
+                className={styles.textField}
+                onChange={this.handleProblem.bind(this)}
+                value={this.state.problem}
+              ></textarea>
+            </div>
+            <div>
+              <div>Solution</div>
+              <textarea
+                className={styles.textField}
+                onChange={this.handleSolution.bind(this)}
+                value={this.state.solution}
+              ></textarea>
+            </div>
+            {/* <TextField
+              required
+              id="problem-id"
+              label="Problem"
+              defaultValue=""
+              onChange={this.handleProblem.bind(this)}
+            />
+            <TextField
+              required
+              id="solution-id"
+              label="Solution"
+              defaultValue=""
+              onChange={this.handleSolution.bind(this)}
+            /> */}
+          </div>
         </div>
         <div>
           {teamMemebers}
@@ -149,18 +220,23 @@ class InputForm extends Component {
             <AddIcon />
           </IconButton>
         </div>
-        <Button
+        {/* <Button
           variant="contained"
           color="primary"
           href="#contained-buttons"
           onClick={this.handleSubmit.bind(this)}
         >
           Submit
-        </Button>
-        {/* <button className={styles.submitBtn}>SUBMIT</button> */}
-      </form>
+        </Button> */}
+        <div className={styles.buttonContainer}>
+          <button className={styles.submitBtn} onClick={this.handleSubmit}>
+            SUBMIT
+          </button>
+        </div>
+      </div>
     );
   }
 }
 
-export default withStyles(styles, { withTheme: true })(InputForm);
+// export default withStyles(styles, { withTheme: true })(InputForm);
+export default InputForm;
