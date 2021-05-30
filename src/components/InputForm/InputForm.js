@@ -23,8 +23,14 @@ class InputForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      company: "DIYversity",
+      product: "Collect It Presenter",
+      industry: "Startups",
+      mission: "We help other startups focus more on important work while our AI takes care of their Slide Decks.",
+      problem: "It's hard to come up with ideas and takes too long to make slides.",
+      solution: "Make Pitch Decks and Case Study Slides fast, easier, and smarter.",
       teamCount: 2,
-      linkedinUrls: ["", ""],
+      linkedinUrls: ["Rene", "Danielle", "Eric", "Mr T"],
     };
   }
 
@@ -95,42 +101,42 @@ class InputForm extends Component {
             required
             id="company-id"
             label="Company"
-            defaultValue=""
+            defaultValue={this.state.company}
             onChange={this.handleCompany.bind(this)}
           />
           <TextField
             required
             id="product-id"
             label="Product"
-            defaultValue=""
+            defaultValue={this.state.product}
             onChange={this.handleProduct.bind(this)}
           />
           <TextField
             required
             id="industry-id"
             label="Industry"
-            defaultValue=""
+            defaultValue={this.state.industry}
             onChange={this.handleIndustry.bind(this)}
           />
           <TextField
             required
             id="mission-id"
             label="Mission"
-            defaultValue=""
+            defaultValue={this.state.mission}
             onChange={this.handleMission.bind(this)}
           />
           <TextField
             required
             id="problem-id"
             label="Problem"
-            defaultValue=""
+            defaultValue={this.state.problem}
             onChange={this.handleProblem.bind(this)}
           />
           <TextField
             required
             id="solution-id"
             label="Solution"
-            defaultValue=""
+            defaultValue={this.state.solution}
             onChange={this.handleSolution.bind(this)}
           />
         </div>
