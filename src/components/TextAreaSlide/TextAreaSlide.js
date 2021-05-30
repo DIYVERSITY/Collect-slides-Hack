@@ -28,12 +28,7 @@ class TextAreaSlide extends Component {
   render(){
       const { classes } = this.props;
       let listitems;
-      if (this.props.section==="persona"){
-          listitems = this.props.data.scenario.map((item)=>(
-              <textarea className={styles.text_area} value={item}></textarea>
-          ));
-      }
-      else if (this.props.section==="competitors"){
+      if (this.props.section==="competitors"){
           listitems = this.props.data.map((item)=>(
               <div>
                   <TextField
@@ -75,7 +70,7 @@ class TextAreaSlide extends Component {
                   />
                   <textarea className={styles.text_area} value={this.props.data.needs}></textarea>
                   <textarea className={styles.text_area} value={this.props.data.pains}></textarea>
-                  <div>{listitems}</div>
+                  <textarea className={styles.text_area} value={this.props.data.scenario}></textarea>
               </div>
           ): this.props.section==="intro"?(
               <div>

@@ -2,20 +2,19 @@ import React, { Component } from "react";
 import axios from "axios";
 import InputForm from "../../components/InputForm/InputForm.js";
 import TextAreaSlide from "../../components/TextAreaSlide/TextAreaSlide";
+import ImageArea from "../../components/Images/ImageArea.js";
 import styles from "./Home.module.css";
 import { handleAuthClick } from "../../utils/google-slides";
 
+const url = "http://158ec8548842.ngrok.io/"
 const endPoints = {
-  intro: " http://1fbac4e4f025.ngrok.io/intro",
-  problem: " http://1fbac4e4f025.ngrok.io/problem",
-  solution: " http://1fbac4e4f025.ngrok.io/solution",
-  persona: " http://1fbac4e4f025.ngrok.io/persona",
-  conclusion: " http://1fbac4e4f025.ngrok.io/conclusion",
-  team: " http://1fbac4e4f025.ngrok.io/team",
+  intro: "intro",
+  problem: "problem",
+  solution: "solution",
+  persona: "persona",
+  conclusion: "conclusion",
+  team: "team",
 };
-
-const dummyText =
-  "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. N";
 
 class Home extends Component {
 
@@ -34,7 +33,7 @@ class Home extends Component {
       "intro": {
         "introImages": ["strings Image url"],
         "mission": "string",
-        "title": "string"
+        "title": ""
       },
       "persona": {
         "age": "string",
@@ -55,44 +54,52 @@ class Home extends Component {
           "description": "string",
           "name": "string"
         }
-      ]
+      ],
+      imageUrl: ""
     };
-    // this.submitData.bind(this);
     this.handleRefresh.bind(this);
-    // this.handleAPIResponse.bind(this);
-
   }
 
   handleRefresh(key) {
-      axios.get(endPoints[key])
+      axios.get(url+endPoints[key])
       .then((response) => {
         this.setState({key: response.data})
       });
   }
 
-  // handleAPIResponse=(key,data)=>{
-  //     if (key==="intro")
-  //       this.setState({intro:response.data});
-  //     else if (key==="problem")
-  //         this.setState({problem:response.data});
-  //     else if (key==="solution")
-  //         this.setState({solution: response.data})
-  //     else if (key==="persona")
-  //         this.setState({persona: response.data})
-  //     else if (key==="conclusion")
-  //         this.setState({conclusion: response.data})
-  //     else if (key === "team")
-  //         this.setState({team: response.data})
-  // }
+  printToSlides=()=>{
+    console.log("button pressed");
+    // pass data into the function below to send to slides
+    let intro = {
+        "introImages": [this.state.imageUrl],
+        "mission": this.state.intro.mission,
+        "title": this.state.intro.title
+    }
+    let presentationData = {
+        "conclusion":this.state.conclusion,
+        "competitors":this.state.competitors,
+        "intro":intro,
+        "persona": this.state.persona,
+        "problem": this.state.problem,
+        "solution": this.state.solution,
+        "team": this.state.team
+    }
+    console.log(presentationData);
+    // handleAuthClick(presentationData);
+  }
+
+  handleImageSelection=(src)=>{
+    this.setState({imageUrl: src});
+  }
 
   submitData=(data)=>{
     console.log(data);
     let handleData = this.handleAPIResponse;
     for (let key in endPoints) {
       console.log(endPoints[key])
-      axios.get(endPoints[key], { params: { data: data } })
+      axios.get(url+endPoints[key], { params: { data: data } })
       .then((response) => {
-        console.log(response.data);
+        console.log(key, response.data);
         if (key==="intro")
           this.setState({intro:response.data});
         else if (key==="problem")
@@ -110,12 +117,6 @@ class Home extends Component {
     }
   }
 
-  function printToSlides() {
-    console.log("button pressed");
-    // pass data into the function below to send to slides
-    handleAuthClick();
-  }
-
   render() {
 
     return (
@@ -123,7 +124,9 @@ class Home extends Component {
         <div>Home page</div>
         <InputForm submit={this.submitData} />
         <TextAreaSlide title="Intro (slide 1)" section="intro" data={this.state.intro} />
-
+        {this.state.intro.title!==""?(
+            <ImageArea keyword={this.state.intro.imgKeyWords} select={this.handleImageSelection}/>
+        ):(<div></div>)}
         <TextAreaSlide title="Problem (slide 2)" section="problem" data={this.state.problem} />
 
         <TextAreaSlide title="Solution (slide 3)" section="solution" data={this.state.solution} />
@@ -133,7 +136,7 @@ class Home extends Component {
         <div className={styles.buttonContainer}>
           <button>Save</button>
         </div>
-        <div onClick={printToSlides} className={styles.buttonContainer}>
+        <div onClick={this.printToSlides} className={styles.buttonContainer}>
           <button>Print to Slides</button>
         </div>
       </div>

@@ -64,6 +64,8 @@ class InputForm extends Component {
 
   handleSubmit() {
     let data = {
+      company: this.state.company,
+      product: this.state.product,
       industry: this.state.industry,
       mission: this.state.mission,
       problem: this.state.problem,

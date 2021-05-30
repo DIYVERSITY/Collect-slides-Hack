@@ -96,7 +96,7 @@ export function handleCreateSlide(data) {
   // console.log(fakeData);
 
   // comment out fakeData for real data into the function
-  data = fakeData;
+  // data = fakeData;
   // comment out fakeData for real data into the function
 
   setIDs();
