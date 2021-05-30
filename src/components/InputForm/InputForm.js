@@ -28,17 +28,17 @@ class InputForm extends Component {
     };
   }
 
-    handleCompany(e){
-        this.setState({company: e.target.value});
-    }
+  handleCompany(e) {
+    this.setState({ company: e.target.value });
+  }
 
-    handleProduct(e){
-        this.setState({product: e.target.value});
-    }
+  handleProduct(e) {
+    this.setState({ product: e.target.value });
+  }
 
-    handleMission(e){
-        this.setState({mission: e.target.value});
-    }
+  handleMission(e) {
+    this.setState({ mission: e.target.value });
+  }
 
   handleIndustry(e) {
     this.setState({ industry: e.target.value });
@@ -84,7 +84,7 @@ class InputForm extends Component {
         id="standard-required"
         label={"Team Member " + index}
         defaultValue={item}
-        name={index}
+        // name={index}
         onChange={this.handleUrls.bind(this)}
       />
     ));
@@ -92,43 +92,43 @@ class InputForm extends Component {
       <form className={classes.root} noValidate autoComplete="off">
         <div>
           <TextField
-           required
-           id="standard-required"
-           label="Company"
-           defaultValue=""
-           onChange = {this.handleCompany.bind(this)}
+            required
+            id="company-id"
+            label="Company"
+            defaultValue=""
+            onChange={this.handleCompany.bind(this)}
           />
           <TextField
             required
-            id="standard-required"
+            id="product-id"
             label="Product"
             defaultValue=""
-            onChange = {this.handleProduct.bind(this)}
+            onChange={this.handleProduct.bind(this)}
           />
           <TextField
             required
-            id="standard-required"
+            id="industry-id"
             label="Industry"
             defaultValue=""
             onChange={this.handleIndustry.bind(this)}
           />
           <TextField
             required
-            id="standard-required"
+            id="mission-id"
             label="Mission"
             defaultValue=""
             onChange={this.handleMission.bind(this)}
           />
           <TextField
             required
-            id="standard-required"
+            id="problem-id"
             label="Problem"
             defaultValue=""
             onChange={this.handleProblem.bind(this)}
           />
           <TextField
             required
-            id="standard-required"
+            id="solution-id"
             label="Solution"
             defaultValue=""
             onChange={this.handleSolution.bind(this)}
@@ -151,6 +151,7 @@ class InputForm extends Component {
         >
           Submit
         </Button>
+        {/* <button className={styles.submitBtn}>SUBMIT</button> */}
       </form>
     );
   }

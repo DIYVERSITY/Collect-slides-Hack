@@ -2,6 +2,8 @@ import { v4 as uuidv4 } from "uuid";
 import titleObject from "./titleObject";
 
 export default function personaTemplate(id, title, data) {
+  var NameID = uuidv4();
+
   var GoalsID = uuidv4();
   var GoalsDescriptionID = uuidv4();
 
@@ -18,6 +20,19 @@ export default function personaTemplate(id, title, data) {
   for (let i = 0; i < titleText.length; i++) {
     objReturn.push(titleText[i]);
   }
+
+  objReturn.push({
+    createShape: createNameText(id, NameID),
+  });
+  objReturn.push({
+    insertText: {
+      objectId: NameID,
+      text: data.name + "   " + data.age,
+    },
+  });
+  objReturn.push({
+    updateTextStyle: formatNameText(NameID),
+  });
 
   objReturn.push({
     createShape: createGoalsText(id, GoalsID),
@@ -101,6 +116,34 @@ export default function personaTemplate(id, title, data) {
   });
 
   return objReturn;
+}
+
+function createNameText(slideID, textID) {
+  var create = {
+    objectId: textID,
+    shapeType: "TEXT_BOX",
+    elementProperties: {
+      pageObjectId: slideID,
+      size: {
+        width: {
+          magnitude: 3000000,
+          unit: "EMU",
+        },
+        height: {
+          magnitude: 3000000,
+          unit: "EMU",
+        },
+      },
+      transform: {
+        scaleX: 2.8402,
+        scaleY: 0.1909,
+        translateX: 311700,
+        translateY: 832500,
+        unit: "EMU",
+      },
+    },
+  };
+  return create;
 }
 
 function createGoalsText(slideID, textID) {
@@ -271,29 +314,29 @@ function createSenarioDescriptionText(slideID, textID) {
   return create;
 }
 
-// function formatNameText(textID) {
-//   let style = {
-//     objectId: textID,
-//     fields: "foregroundColor,fontFamily,fontSize",
-//     style: {
-//       foregroundColor: {
-//         opaqueColor: {
-//           themeColor: "LIGHT2",
-//         },
-//       },
-//       // bold: true,
-//       fontFamily: "Oswald",
-//       fontSize: {
-//         magnitude: 25,
-//         unit: "PT",
-//       },
-//     },
-//     textRange: {
-//       type: "ALL",
-//     },
-//   };
-//   return style;
-// }
+function formatNameText(textID) {
+  let style = {
+    objectId: textID,
+    fields: "foregroundColor,fontFamily,fontSize",
+    style: {
+      foregroundColor: {
+        opaqueColor: {
+          themeColor: "LIGHT2",
+        },
+      },
+      // bold: true,
+      fontFamily: "Oswald",
+      fontSize: {
+        magnitude: 20,
+        unit: "PT",
+      },
+    },
+    textRange: {
+      type: "ALL",
+    },
+  };
+  return style;
+}
 
 function formatSubjectText(textID) {
   let style = {
@@ -332,7 +375,7 @@ function formatDescriptionText(textID) {
       // bold: true,
       fontFamily: "Oswald",
       fontSize: {
-        magnitude: 10,
+        magnitude: 11,
         unit: "PT",
       },
     },
