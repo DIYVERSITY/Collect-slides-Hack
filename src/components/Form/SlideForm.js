@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./SlideForm.module.css";
-import { handleCreateSlide, handleAuthClick } from "../../utils/google-slides";
+// import { handleCreateSlide, handleAuthClick } from "../../utils/google-slides";
+import { handleCreateSlide } from "../../utils/google-slides";
+
 import Form from "@rjsf/core";
 
 const schema = {

@@ -3,11 +3,11 @@ import { gapi } from "gapi-script";
 
 import descriptionTemplate from "./descriptionTemplate";
 
-import competitorTemplate1 from "./competitorTemplate1";
+// import competitorTemplate1 from "./competitorTemplate1";
 import personaTemplate from "./personaTemplate";
 import teamTemplate from "./teamTemplate";
 
-import fakeData from "../data-models/slides-example.json";
+// import fakeData from "../data-models/slides-example.json";
 
 // Client ID and API key from the Developer Console
 var CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
@@ -39,7 +39,7 @@ export function handleSignoutClick() {
 }
 
 export async function handleInitApp() {
-  console.log("init App");
+  console.log("init Google API");
   gapi.client
     .init({
       apiKey: API_KEY,
@@ -58,13 +58,13 @@ export async function handleInitApp() {
 }
 
 var rgbColor = [55, 71, 79];
-var totalSlides = 6;
+var totalSlides = 5;
 var slideID = [];
 var slideTitleId = [];
 var slideTitleText = [
   "Problem",
   "Solution",
-  "Competitor Analysis",
+  // "Competitor Analysis",
   "Persona",
   "Conclusion",
   "Team",
@@ -137,6 +137,9 @@ function createSlide(data) {
       updatePageProperties: changeBackgroundColor("p"),
     },
     {
+      updatePageElementTransform: updateMainTitle(titleID),
+    },
+    {
       updateTextStyle: formatMainTitleText(titleID),
     },
     {
@@ -175,18 +178,18 @@ function createSlide(data) {
   // /////////
   // Slide 4 Competitor
   // /////////
-  var competitor = competitorTemplate1(
-    slideID[2],
-    slideTitleText[2],
-    data.competitors
-  );
-  for (let i = 0; i < competitor.length; i++) {
-    requests.push(competitor[i]);
-  }
+  // var competitor = competitorTemplate1(
+  //   slideID[2],
+  //   slideTitleText[2],
+  //   data.competitors
+  // );
+  // for (let i = 0; i < competitor.length; i++) {
+  //   requests.push(competitor[i]);
+  // }
   // /////////
   // Slide 5 Persona
   // /////////
-  var persona = personaTemplate(slideID[3], slideTitleText[3], data.persona);
+  var persona = personaTemplate(slideID[2], slideTitleText[2], data.persona);
   for (let i = 0; i < persona.length; i++) {
     requests.push(persona[i]);
   }
@@ -194,8 +197,8 @@ function createSlide(data) {
   // Slide 6 Conclusion
   // /////////
   var conclusion = descriptionTemplate(
-    slideID[4],
-    slideTitleText[4],
+    slideID[3],
+    slideTitleText[3],
     data.conclusion.conclusion
   );
   for (let i = 0; i < conclusion.length; i++) {
@@ -204,7 +207,7 @@ function createSlide(data) {
   // /////////
   // Slide 7 Team
   // /////////
-  var team = teamTemplate(slideID[5], slideTitleText[5], data.team);
+  var team = teamTemplate(slideID[4], slideTitleText[4], data.team.members);
   for (let i = 0; i < team.length; i++) {
     requests.push(team[i]);
   }
@@ -290,33 +293,20 @@ function changeBackgroundColor(slideID) {
   return background;
 }
 
-// function createMainPhoto(slideID, imageID, imageUrl) {
-//   var create = {
-//     objectId: imageID,
-//     url: imageUrl,
-//     elementProperties: {
-//       pageObjectId: slideID,
-//       size: {
-//         width: {
-//           magnitude: 32000,
-//           unit: "EMU",
-//         },
-//         height: {
-//           magnitude: 23350,
-//           unit: "EMU",
-//         },
-//       },
-//       transform: {
-//         scaleX: 97.6266,
-//         scaleY: 128.7131,
-//         translateX: 5848750.03,
-//         translateY: 1152474.95,
-//         unit: "EMU",
-//       },
-//     },
-//   };
-//   return create;
-// }
+function updateMainTitle(textID) {
+  let update = {
+    objectId: textID,
+    transform: {
+      scaleX: 2.8402,
+      scaleY: 0.3369,
+      translateX: 311700,
+      translateY: 1175399.9975,
+      unit: "EMU",
+    },
+    applyMode: "ABSOLUTE",
+  };
+  return update;
+}
 
 function formatMainTitleText(textID) {
   let style = {
