@@ -60,7 +60,7 @@ class InputForm extends Component {
                 mission: this.state.mission,
                 problem: this.state.problem,
                 solution: this.state.solution,
-                linkedinUrls: this.state.solution}
+                linkedinUrls: this.state.linkedinUrls}
         this.props.submit(data)
     }
 
