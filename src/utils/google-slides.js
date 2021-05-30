@@ -343,7 +343,7 @@ function formatMainDescriptionText(textID) {
       },
       fontFamily: "Average",
       fontSize: {
-        magnitude: 26,
+        magnitude: 20,
         unit: "PT",
       },
     },
