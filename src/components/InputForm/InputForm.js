@@ -98,7 +98,7 @@ class InputForm extends Component {
           // name={index}
           onChange={this.handleUrls.bind(this)}
         /> */}
-        Team Member {index}
+        Team Member {index + 1}
         <textarea
           className={styles.textField}
           onChange={this.handleUrls.bind(this)}
@@ -214,6 +214,7 @@ class InputForm extends Component {
         <div>
           {teamMemebers}
           <IconButton
+            color="inherit"
             aria-label="add Member"
             onClick={this.addTeamMember.bind(this)}
           >
