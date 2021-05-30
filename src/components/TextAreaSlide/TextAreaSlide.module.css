@@ -34,3 +34,28 @@
   resize: none;
   font-size: 14px;
 }
+
+.textRow1 {
+  display: flex;
+  color: rgb(238, 238, 238);
+  text-shadow: 1px 1px 2px #1a1a1a;
+  justify-content: space-between;
+  margin-top: 15px;
+  width: 35vw;
+}
+
+.textRow2 {
+  display: flex;
+  color: rgb(238, 238, 238);
+  text-shadow: 1px 1px 2px #1a1a1a;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.smallText {
+  resize: none;
+  border: 0.5px solid rgb(238, 238, 238);
+  box-shadow: 1px 1px 2px #1a1a1a;
+  border-radius: 5px;
+  margin-right: 80px;
+}

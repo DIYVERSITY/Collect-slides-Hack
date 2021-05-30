@@ -63,20 +63,32 @@ class TextAreaSlide extends Component {
           ></textarea>
         ) : this.props.section === "persona" ? (
           <div>
-            <TextField
+            <div className={styles.textRow2}>
+              Name
+              <textarea
+                className={styles.smallText}
+                // value={this.props.data.age}
+              ></textarea>
+              {/* <TextField
               required
               id="persona-name-id"
               label="Name"
               // defaultValue={this.props.data.name}
               value={this.props.data.name}
-            />
-            <TextField
+            /> */}
+              Age
+              <textarea
+                className={styles.smallText}
+                // value={this.props.data.age}
+              ></textarea>
+              {/* <TextField
               required
               id="persona-age-id"
               label="age"
               // defaultValue={this.props.data.age}
               value={this.props.data.age}
-            />
+            /> */}
+            </div>
             <textarea
               className={styles.text_area}
               value={this.props.data.needs}
@@ -95,13 +107,20 @@ class TextAreaSlide extends Component {
           </div>
         ) : this.props.section === "intro" ? (
           <div>
-            <TextField
+            <div className={styles.textRow1}>
+              Name
+              <textarea
+                className={styles.smallText}
+                // value={this.props.data.age}
+              ></textarea>
+            </div>
+            {/* <TextField
               required
               id="title-id"
               label="title"
               // defaultValue={this.props.data.title}
               value={this.props.data.title}
-            />
+            /> */}
             <textarea
               className={styles.text_area}
               value={this.props.data.mission}
