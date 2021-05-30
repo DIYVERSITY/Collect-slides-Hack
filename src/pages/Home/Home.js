@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import InputForm from "../../components/InputForm/InputForm.js";
 import TextAreaSlide from "../../components/TextAreaSlide/TextAreaSlide";
+import styles from "./Home.module.css";
+import { handleAuthClick } from "../../utils/google-slides";
 
 const endPoints = {
   intro: " http://1fbac4e4f025.ngrok.io/intro",
@@ -108,10 +110,16 @@ class Home extends Component {
     }
   }
 
+  function printToSlides() {
+    console.log("button pressed");
+    // pass data into the function below to send to slides
+    handleAuthClick();
+  }
+
   render() {
-    console.log(this.state);
+
     return (
-      <div>
+      <div className={styles.homeContainer}>
         <div>Home page</div>
         <InputForm submit={this.submitData} />
         <TextAreaSlide title="Intro (slide 1)" section="intro" data={this.state.intro} />
@@ -121,7 +129,13 @@ class Home extends Component {
         <TextAreaSlide title="Solution (slide 3)" section="solution" data={this.state.solution} />
         <TextAreaSlide title="Persona (slide 4)" section="persona" data={this.state.persona} />
         <TextAreaSlide title="Competitor (slide 5)" section="competitors" data={this.state.competitors} />
-        <TextAreaSlide title="Conclusion (slide 5)" section="conclusion" data={this.state.conclusion} />
+        <TextAreaSlide title="Conclusion (slide 6)" section="conclusion" data={this.state.conclusion} />
+        <div className={styles.buttonContainer}>
+          <button>Save</button>
+        </div>
+        <div onClick={printToSlides} className={styles.buttonContainer}>
+          <button>Print to Slides</button>
+        </div>
       </div>
     );
   }
