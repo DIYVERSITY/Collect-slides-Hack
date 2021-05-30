@@ -11,9 +11,6 @@ export default function competitorTemplate1(id, title, data) {
   var Comp3NameID = uuidv4();
   var Comp3DescriptionID = uuidv4();
 
-  var Comp4NameID = uuidv4();
-  var Comp4DescriptionID = uuidv4();
-
   var objReturn = [];
   // console.log("competitors");
   // console.log(data);
@@ -97,31 +94,6 @@ export default function competitorTemplate1(id, title, data) {
   objReturn.push({
     updateTextStyle: formatDescriptionText(Comp3DescriptionID),
   });
-  //
-  // objReturn.push({
-  //   createShape: createCompName4Text(id, Comp4NameID),
-  // });
-  // objReturn.push({
-  //   insertText: {
-  //     objectId: Comp4NameID,
-  //     text: data[3].name,
-  //   },
-  // });
-  // objReturn.push({
-  //   updateTextStyle: formatNameText(Comp4NameID),
-  // });
-  // objReturn.push({
-  //   createShape: createCompDescription4Text(id, Comp4DescriptionID),
-  // });
-  // objReturn.push({
-  //   insertText: {
-  //     objectId: Comp4DescriptionID,
-  //     text: data[3].description,
-  //   },
-  // });
-  // objReturn.push({
-  //   updateTextStyle: formatDescriptionText(Comp4DescriptionID),
-  // });
 
   return objReturn;
 }
@@ -209,33 +181,6 @@ function createCompName3Text(slideID, textID) {
   };
   return create;
 }
-// function createCompName4Text(slideID, textID) {
-//   var create = {
-//     objectId: textID,
-//     shapeType: "TEXT_BOX",
-//     elementProperties: {
-//       pageObjectId: slideID,
-//       size: {
-//         width: {
-//           magnitude: 3000000,
-//           unit: "EMU",
-//         },
-//         height: {
-//           magnitude: 3000000,
-//           unit: "EMU",
-//         },
-//       },
-//       transform: {
-//         scaleX: 2.8402,
-//         scaleY: 0.1487,
-//         translateX: 311700,
-//         translateY: 3906425,
-//         unit: "EMU",
-//       },
-//     },
-//   };
-//   return create;
-// }
 
 function createCompDescription1Text(slideID, textID) {
   var create = {
@@ -320,33 +265,6 @@ function createCompDescription3Text(slideID, textID) {
   };
   return create;
 }
-// function createCompDescription4Text(slideID, textID) {
-//   var create = {
-//     objectId: textID,
-//     shapeType: "TEXT_BOX",
-//     elementProperties: {
-//       pageObjectId: slideID,
-//       size: {
-//         width: {
-//           magnitude: 3000000,
-//           unit: "EMU",
-//         },
-//         height: {
-//           magnitude: 3000000,
-//           unit: "EMU",
-//         },
-//       },
-//       transform: {
-//         scaleX: 2.8402,
-//         scaleY: 0.2413,
-//         translateX: 311700,
-//         translateY: 4239700,
-//         unit: "EMU",
-//       },
-//     },
-//   };
-//   return create;
-// }
 
 function formatNameText(textID) {
   let style = {
