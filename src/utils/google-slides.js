@@ -69,10 +69,6 @@ var slideTitleText = [
   "Conclusion",
   "Team",
 ];
-var slideDescriptionId = [];
-var slideDescriptionText = [];
-var slidePhotoId = [];
-var slidePhotoUrl = [];
 var slideNoteText = [];
 var deckID = "";
 var titleSlide = "";
@@ -83,24 +79,11 @@ function setIDs() {
   for (let i = 0; i < totalSlides; i++) {
     slideID[i] = uuidv4();
     slideTitleId[i] = uuidv4();
-    slideDescriptionId[i] = uuidv4();
-    slidePhotoId[i] = uuidv4();
-    // slideTitleText[i] = "";
-    slideDescriptionText[i] = "";
-    slidePhotoUrl[i] =
-      "https://storage.needpix.com/rsynced_images/chart-line-148256_1280.png";
     slideNoteText[i] = "";
   }
 }
 
 function convertText(data) {
-  // if (data.slide1Picture) slidePhotoUrl[0] = data.slide1Picture;
-  // if (data.slide2Picture) slidePhotoUrl[1] = data.slide2Picture;
-  // if (data.slide3Picture) slidePhotoUrl[2] = data.slide3Picture;
-  // if (data.slide4Picture) slidePhotoUrl[3] = data.slide4Picture;
-  // if (data.slide5Picture) slidePhotoUrl[4] = data.slide5Picture;
-  // if (data.slide6Picture) slidePhotoUrl[5] = data.slide6Picture;
-
   if (data.slide1Notes) slideNoteText[1] = data.slide1Notes;
   if (data.slide2Notes) slideNoteText[2] = data.slide2Notes;
   if (data.slide3Notes) slideNoteText[3] = data.slide3Notes;
@@ -110,11 +93,11 @@ function convertText(data) {
 }
 
 export function handleCreateSlide(data) {
-  console.log(fakeData);
+  // console.log(fakeData);
   data = fakeData;
   setIDs();
   console.log("creating slide");
-  console.log(data);
+  // console.log(data);
   gapi.client.slides.presentations
     .create({
       title: data.intro.title,
@@ -303,7 +286,7 @@ function changeBackgroundColor(slideID) {
   return background;
 }
 
-// function createRightPhoto(slideID, imageID, imageUrl) {
+// function createMainPhoto(slideID, imageID, imageUrl) {
 //   var create = {
 //     objectId: imageID,
 //     url: imageUrl,

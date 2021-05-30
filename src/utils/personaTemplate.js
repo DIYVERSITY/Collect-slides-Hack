@@ -12,8 +12,8 @@ export default function personaTemplate(id, title, data) {
   var ScenarioDescriptionID = uuidv4();
 
   var objReturn = [];
-  console.log("persona here");
-  console.log(data);
+  // console.log("persona here");
+  // console.log(data);
   var titleText = titleObject(id, title);
   for (let i = 0; i < titleText.length; i++) {
     objReturn.push(titleText[i]);
