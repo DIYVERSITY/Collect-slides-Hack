@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/Add';
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -28,30 +30,38 @@ class InputForm extends Component {
     }
 
     handleMission(e){
-        console.log(e.target.value);
         this.setState({mission: e.target.value});
     }
 
     handleIndustry(e){
-        console.log(e.target.value);
         this.setState({industry: e.target.value});
     }
 
     handleProblem(e){
-        console.log(e.target.value);
         this.setState({problem: e.target.value});
     }
 
     handleSolution(e){
-        console.log(e.target.value);
         this.setState({solution: e.target.value});
     }
 
     handleUrls(e){
-        console.log(e.target.value, e.target.name);
         let urls = [...this.state.linkedinUrls]
         urls[e.target.name] = e.target.value
         this.setState({linkedinUrls: urls});
+    }
+
+    addTeamMember(){
+        this.setState({linkedinUrls:[...this.state.linkedinUrls, ""]})
+    }
+
+    handleSubmit(){
+        let data = {industry: this.state.industry,
+                mission: this.state.mission,
+                problem: this.state.problem,
+                solution: this.state.solution,
+                linkedinUrls: this.state.solution}
+        this.props.submit(data)
     }
 
     render() {
@@ -101,8 +111,11 @@ class InputForm extends Component {
             </div>
             <div>
                 {teamMemebers}
+                <IconButton aria-label="add Member" onClick={this.addTeamMember.bind(this)}>
+                    <AddIcon/>
+                </IconButton>
             </div>
-            <Button variant="contained" color="primary" href="#contained-buttons">
+            <Button variant="contained" color="primary" href="#contained-buttons" onClick={this.handleSubmit.bind(this)}>
               Submit
             </Button>
           </form>
