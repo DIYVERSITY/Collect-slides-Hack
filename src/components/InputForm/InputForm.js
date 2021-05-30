@@ -24,8 +24,17 @@ class InputForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      company: "DIYversity",
+      product: "Collect It Presenter",
+      industry: "Startups",
+      mission:
+        "We help other startups focus more on important work while our AI takes care of their Slide Decks.",
+      problem:
+        "It's hard to come up with ideas and takes too long to make slides.",
+      solution:
+        "Make Pitch Decks and Case Study Slides fast, easier, and smarter.",
       teamCount: 2,
-      linkedinUrls: ["", ""],
+      linkedinUrls: ["Rene", "Danielle", "Eric", "Mr T"],
     };
   }
 
@@ -107,6 +116,7 @@ class InputForm extends Component {
               <textarea
                 className={styles.textField}
                 onChange={this.handleCompany.bind(this)}
+                value={this.state.company}
               ></textarea>
             </div>
             <div>
@@ -114,6 +124,7 @@ class InputForm extends Component {
               <textarea
                 className={styles.textField}
                 onChange={this.handleProduct.bind(this)}
+                value={this.state.product}
               ></textarea>
             </div>
 
@@ -139,6 +150,7 @@ class InputForm extends Component {
               <textarea
                 className={styles.textField}
                 onChange={this.handleIndustry.bind(this)}
+                value={this.state.industry}
               ></textarea>
             </div>
             <div>
@@ -146,6 +158,7 @@ class InputForm extends Component {
               <textarea
                 className={styles.textField}
                 onChange={this.handleMission.bind(this)}
+                value={this.state.mission}
               ></textarea>
             </div>
 
@@ -171,6 +184,7 @@ class InputForm extends Component {
               <textarea
                 className={styles.textField}
                 onChange={this.handleProblem.bind(this)}
+                value={this.state.problem}
               ></textarea>
             </div>
             <div>
@@ -178,6 +192,7 @@ class InputForm extends Component {
               <textarea
                 className={styles.textField}
                 onChange={this.handleSolution.bind(this)}
+                value={this.state.solution}
               ></textarea>
             </div>
             {/* <TextField
