@@ -3,8 +3,8 @@ import titleObject from "./titleObject";
 
 export default function teamTemplate(id, title, data) {
   var objReturn = [];
-  console.log("team");
-  console.log(data);
+  // console.log("team");
+  // console.log(data);
   var titleText = titleObject(id, title);
   for (let i = 0; i < titleText.length; i++) {
     objReturn.push(titleText[i]);

@@ -70,7 +70,7 @@ function formatDescriptionText(textID) {
       // lineSpacing: 137.5,
       fontFamily: "Average",
       fontSize: {
-        magnitude: 12,
+        magnitude: 14,
         unit: "PT",
       },
     },
