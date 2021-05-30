@@ -1,0 +1,33 @@
+.container {
+  padding: 20px 20px;
+}
+
+.title_container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.title_container button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: rgb(67, 155, 67);
+  margin-right: -45px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: grey;
+}
+
+.text_area {
+  border: 0.5px solid rgb(112, 112, 112);
+  padding: 5px 20px;
+  margin: 20px 0px;
+  width: 100%;
+  height: 120px;
+  resize: none;
+  font-size: 14px;
+}
