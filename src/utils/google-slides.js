@@ -28,9 +28,11 @@ export function handleAuthClick(data) {
     .getAuthInstance()
     .signIn()
     .then(() => {
+      console.log("signed in");
       handleCreateSlide(data);
     });
-  console.log("signed in");
+  // console.log("signed in");
+  // handleCreateSlide(data);
 }
 
 export function handleSignoutClick() {
