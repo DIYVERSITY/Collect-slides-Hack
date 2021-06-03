@@ -6,7 +6,7 @@ import ImageArea from "../../components/Images/ImageArea.js";
 import styles from "./Home.module.css";
 import { handleAuthClick } from "../../utils/google-slides";
 
-const url = "http://bd48b27f1da6.ngrok.io/";
+const url = "http://64345471f851.ngrok.io/";
 const endPoints = {
   intro: "intro",
   problem: "problem",
