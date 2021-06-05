@@ -1,24 +1,7 @@
 import React, { Component } from "react";
-// import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
-// import Button from "@material-ui/core/Button";
-// import { withStyles } from "@material-ui/core/styles";
 import styles from "./InputForm.module.css";
-
-// const styles = (theme) => ({
-//   root: {
-//     "& .MuiTextField-root": {
-//       margin: theme.spacing(2),
-//       width: "70ch",
-//     },
-
-//     "& .MuiButton-root": {
-//       margin: theme.spacing(2),
-//     },
-//     margin: theme.spacing(1),
-//   },
-// });
 
 class InputForm extends Component {
   constructor(props) {
@@ -86,18 +69,8 @@ class InputForm extends Component {
   };
 
   render() {
-    // const { classes } = this.props;
     let teamMemebers = this.state.linkedinUrls.map((item, index) => (
       <div className={styles.formRow} key={index}>
-        {/* <TextField
-          required
-          key={index}
-          id="standard-required"
-          label={"Team Member " + index}
-          defaultValue={item}
-          // name={index}
-          onChange={this.handleUrls.bind(this)}
-        /> */}
         Team Member {index + 1}
         <textarea
           className={styles.textField}
@@ -106,8 +79,6 @@ class InputForm extends Component {
       </div>
     ));
     return (
-      // <form className={classes.root} noValidate autoComplete="off">
-      // <form noValidate autoComplete="off">
       <div>
         <div className={styles.formContainer}>
           <div className={styles.formRow}>
@@ -127,22 +98,6 @@ class InputForm extends Component {
                 value={this.state.product}
               ></textarea>
             </div>
-
-            {/* <TextField
-              className={styles.textField}
-              required
-              id="company-id"
-              label="Company"
-              defaultValue=""
-              onChange={this.handleCompany.bind(this)}
-            />
-            <TextField
-              required
-              id="product-id"
-              label="Product"
-              defaultValue=""
-              onChange={this.handleProduct.bind(this)}
-            /> */}
           </div>
           <div className={styles.formRow}>
             <div>
@@ -161,21 +116,6 @@ class InputForm extends Component {
                 value={this.state.mission}
               ></textarea>
             </div>
-
-            {/* <TextField
-              required
-              id="industry-id"
-              label="Industry"
-              defaultValue=""
-              onChange={this.handleIndustry.bind(this)}
-            />
-            <TextField
-              required
-              id="mission-id"
-              label="Mission"
-              defaultValue=""
-              onChange={this.handleMission.bind(this)}
-            /> */}
           </div>
 
           <div className={styles.formRow}>
@@ -195,20 +135,6 @@ class InputForm extends Component {
                 value={this.state.solution}
               ></textarea>
             </div>
-            {/* <TextField
-              required
-              id="problem-id"
-              label="Problem"
-              defaultValue=""
-              onChange={this.handleProblem.bind(this)}
-            />
-            <TextField
-              required
-              id="solution-id"
-              label="Solution"
-              defaultValue=""
-              onChange={this.handleSolution.bind(this)}
-            /> */}
           </div>
         </div>
         <div>
@@ -221,14 +147,6 @@ class InputForm extends Component {
             <AddIcon />
           </IconButton>
         </div>
-        {/* <Button
-          variant="contained"
-          color="primary"
-          href="#contained-buttons"
-          onClick={this.handleSubmit.bind(this)}
-        >
-          Submit
-        </Button> */}
         <div className={styles.buttonContainer}>
           <button className={styles.submitBtn} onClick={this.handleSubmit}>
             SUBMIT
@@ -239,5 +157,4 @@ class InputForm extends Component {
   }
 }
 
-// export default withStyles(styles, { withTheme: true })(InputForm);
 export default InputForm;

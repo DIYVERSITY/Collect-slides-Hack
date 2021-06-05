@@ -23,14 +23,29 @@ var DISCOVERY_DOCS = [
 
 var SCOPES = "https://www.googleapis.com/auth/presentations";
 
+var gapiInit = false;
+
 export function handleAuthClick(data) {
-  gapi.auth2
-    .getAuthInstance()
-    .signIn()
-    .then(() => {
-      console.log("signed in");
-      handleCreateSlide(data);
+  if (gapiInit === false) {
+    handleInitApp().then(() => {
+      gapi.auth2
+        .getAuthInstance()
+        .signIn()
+        .then(() => {
+          console.log("signed in");
+          handleCreateSlide(data);
+        });
     });
+  } else {
+    gapi.auth2
+      .getAuthInstance()
+      .signIn()
+      .then(() => {
+        console.log("signed in");
+        handleCreateSlide(data);
+      });
+  }
+
   // console.log("signed in");
   // handleCreateSlide(data);
 }
@@ -51,6 +66,7 @@ export async function handleInitApp() {
     })
     .then(() => {
       // console.log("init finished");
+      gapiInit = true;
       console.log(
         "%c Currently Signed in? " +
           gapi.auth2.getAuthInstance().isSignedIn.get(),
@@ -226,7 +242,7 @@ function createSlide(data) {
     .then((createSlideResponse) => {
       console.log(createSlideResponse.result);
       console.log("presentation created");
-
+      handleSignoutClick();
       // setNotes();
     });
 }

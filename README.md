@@ -1,4 +1,17 @@
-# AI Hack-a-thon test again
+# Submissions from Deep Learning Labs 2021 EP #3
+
+This submission uses OpenAI's GPT-3 to help pre-populate content to create a Google Slide. The api link going to the backend to access the GPT-3 data has been shutdown the form on the main page will not work.
+
+To use the google slides api, go to [Google Developers Console](https://console.developers.google.com/) to create your client id and api key.
+
+create a .env file in the root
+
+```
+REACT_APP_CLIENT_ID="YOUR_CLIENT_ID_HERE"
+REACT_APP_API_KEY="YOUR_API_KEY_HERE"
+```
+
+Testing page for sending fake data to slides is at http://localhost:3000/confirm
 
 # Getting Started with Create React App
 
@@ -46,29 +59,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-### test Push
